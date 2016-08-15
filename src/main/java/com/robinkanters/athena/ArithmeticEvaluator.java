@@ -54,9 +54,9 @@ public class ArithmeticEvaluator {
         return calculateResult(new DivisionOperation());
     }
 
-    private double calculateResult(Operation addition) {
-        operation = addition;
-        return addition.calculate(evaluateLeft(), evaluateRight());
+    private double calculateResult(Operation operation) {
+        this.operation = operation;
+        return operation.calculate(evaluateLeft(), evaluateRight());
     }
 
     private double evaluateNested(String operation) {
