@@ -10,7 +10,7 @@ public class ArithmeticEvaluator {
     @SuppressWarnings("WeakerAccess")
     public double evaluate(String input) {
         this.input = input;
-        if (hasAddition())
+        if (!hasAddition())
             return calculateAddition();
         else if(hasSubtraction())
             return calculateSubtraction();
