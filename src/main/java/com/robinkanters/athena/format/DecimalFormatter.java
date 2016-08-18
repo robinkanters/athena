@@ -1,22 +1,25 @@
 package com.robinkanters.athena.format;
 
-public class DecimalFormatter {
-    public String formatDouble(double calculatedResult) {
-        if(canBeCastToLong(calculatedResult))
-            return formatLong(calculatedResult);
+import java.text.DecimalFormat;
 
-        return String.format("%f", calculatedResult);
+public class DecimalFormatter {
+    public String format(double input) {
+        if(canBeCastToLong(input))
+            return format((long)input);
+
+        return formatDouble(input);
+    }
+
+    public String format(long calculatedResult) {
+        return formatDouble(calculatedResult);
+    }
+
+    private String formatDouble(double input) {
+        DecimalFormat df = new DecimalFormat("0.########");
+        return df.format(input);
     }
 
     private boolean canBeCastToLong(double calculatedResult) {
         return calculatedResult == (long)calculatedResult;
-    }
-
-    public String formatLong(double number) {
-        return formatLong((long)number);
-    }
-
-    public String formatLong(long calculatedResult) {
-        return String.format("%d", calculatedResult);
     }
 }

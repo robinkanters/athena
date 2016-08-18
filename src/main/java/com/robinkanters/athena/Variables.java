@@ -12,10 +12,10 @@ public class Variables extends HashMap<String, String> implements KeyValueStore 
     }
 
     public void put(String key, double value) {
-        put(key, formatter.formatDouble(value));
+        put(key, formatter.format(value));
     }
 
     public void put(String key, long value) {
-        put(key, formatter.formatLong(value));
+        put(key, formatter.format(value));
     }
 }

@@ -56,7 +56,7 @@ public class ArithmeticEvaluator implements Evaluator {
     }
 
     private String calculateAndFormatResult(Operation operation) {
-        return decimalFormatter.formatDouble(calculateResult(operation));
+        return decimalFormatter.format(calculateResult(operation));
     }
 
     private double calculateResult(Operation operation) {
