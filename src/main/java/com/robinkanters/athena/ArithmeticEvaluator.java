@@ -1,6 +1,6 @@
 package com.robinkanters.athena;
 
-import com.robinkanters.athena.operation.*;
+import com.robinkanters.athena.math.*;
 
 @SuppressWarnings("WeakerAccess")
 public class ArithmeticEvaluator {
