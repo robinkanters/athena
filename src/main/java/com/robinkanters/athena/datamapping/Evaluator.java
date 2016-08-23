@@ -1,4 +1,4 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.datamapping;
 
 interface Evaluator {
     @SuppressWarnings("WeakerAccess")

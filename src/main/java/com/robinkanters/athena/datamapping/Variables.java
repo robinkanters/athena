@@ -1,4 +1,4 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.datamapping;
 
 import com.robinkanters.athena.format.DecimalFormatter;
 
@@ -8,7 +8,7 @@ public class Variables extends HashMap<String, String> implements KeyValueStore 
     private DecimalFormatter formatter = new DecimalFormatter();
 
     public void put(String key, int value) {
-        put(key, value+"");
+        put(key, value + "");
     }
 
     public void put(String key, double value) {

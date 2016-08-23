@@ -1,4 +1,4 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.datamapping;
 
 import com.robinkanters.athena.format.DecimalFormatter;
 import com.robinkanters.athena.math.*;
@@ -14,9 +14,9 @@ public class ArithmeticEvaluator implements Evaluator {
         this.input = input;
         if (hasAddition())
             return calculateAddition();
-        else if(hasSubtraction())
+        else if (hasSubtraction())
             return calculateSubtraction();
-        else if(hasMultiplication())
+        else if (hasMultiplication())
             return calculateMultiplication();
         else if (hasDivision())
             return calculateDivision();

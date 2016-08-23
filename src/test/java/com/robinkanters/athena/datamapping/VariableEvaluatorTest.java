@@ -1,4 +1,4 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.datamapping;
 
 import org.junit.Before;
 import org.junit.Test;

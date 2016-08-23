@@ -1,4 +1,4 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.datamapping;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -29,17 +29,17 @@ public class ArithmeticEvaluatorTest {
     public void onePlusTwoReturnsThree() throws Exception {
         assertEvaluates("1+2", "3");
     }
-    
+
     @Test
     public void twelveMinusNineIsThree() throws Exception {
         assertEvaluates("12-9", "3");
     }
-    
+
     @Test
     public void twoTimesFourIsEight() throws Exception {
         assertEvaluates("2*4", "8");
     }
-    
+
     @Test
     public void twoTimesThreePlusFourIsTen() throws Exception {
         assertEvaluates("2*3+4", "10");
@@ -49,23 +49,26 @@ public class ArithmeticEvaluatorTest {
     public void sixOverTwoIsThree() throws Exception {
         assertEvaluates("6/2", "3");
     }
-    
+
     @Test
     public void eightOverTwoTimesThreeIsTwelve() throws Exception {
         assertEvaluates("8/2*3", "12");
     }
 
-    @Ignore @Test
+    @Ignore
+    @Test
     public void twoToPowerThreeIsEight() throws Exception {
         assertEvaluates("2^3", "8");
     }
-    
-    @Ignore @Test
+
+    @Ignore
+    @Test
     public void sixPlusTwoToPowerTwoIsTen() throws Exception {
         assertEvaluates("6+2^2", "10");
     }
-    
-    @Ignore @Test
+
+    @Ignore
+    @Test
     public void tenToPowerMinusTwoIsOneHundredth() throws Exception {
         assertEvaluates("10^-2", "0.01");
     }

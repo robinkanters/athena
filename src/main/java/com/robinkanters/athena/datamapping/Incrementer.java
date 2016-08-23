@@ -1,8 +1,8 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.datamapping;
 
 public class Incrementer implements ValueGenerator {
-    private int value;
     private final int step;
+    private int value;
 
     public Incrementer() {
         step = 1;
