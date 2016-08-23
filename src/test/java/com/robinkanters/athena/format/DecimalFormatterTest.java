@@ -1,13 +1,11 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.format;
 
-import com.robinkanters.athena.format.DecimalFormatter;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class DecimalFormatterTest {
-
     private DecimalFormatter formatter;
 
     @Before
@@ -26,15 +24,20 @@ public class DecimalFormatterTest {
 
     @Test
     public void formatDoubleWithNonZeroDecimals() throws Exception {
-        assertFormatsAs(1.1, "1.1");
-        assertFormatsAs(1.12, "1.12");
-        assertFormatsAs(1.123, "1.123");
-        assertFormatsAs(1.1234, "1.1234");
-        assertFormatsAs(1.12345, "1.12345");
-        assertFormatsAs(1.123456, "1.123456");
-        assertFormatsAs(1.1234567, "1.1234567");
+        //@formatter:off
+        assertFormatsAs(1.1,        "1.1");
+        assertFormatsAs(1.12,       "1.12");
+        assertFormatsAs(1.123,      "1.123");
+        assertFormatsAs(1.1234,     "1.1234");
+        assertFormatsAs(1.12345,    "1.12345");
+        assertFormatsAs(1.123456,   "1.123456");
+        assertFormatsAs(1.1234567,  "1.1234567");
         assertFormatsAs(1.12345678, "1.12345678");
-
+        //@formatter:on
+    }
+    
+    @Test
+    public void formatDoubleWithMoreThanEightDecimalsIsRoundedCorrectly() throws Exception {
         String roundedDown = "1.12345678";
         assertFormatsAs(1.123456785, roundedDown);
 
