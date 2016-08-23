@@ -19,8 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="athena_main" target="1.5" />
-      <module name="athena_test" target="1.5" />
+      <module name="athena_main" target="1.7" />
+      <module name="athena_test" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
