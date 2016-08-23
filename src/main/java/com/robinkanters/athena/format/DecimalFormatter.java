@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class DecimalFormatter {
     public String format(double input) {
-        if(canBeCastToLong(input))
-            return format((long)input);
+        if (canBeCastToLong(input))
+            return format((long) input);
 
         return formatDouble(input);
     }
@@ -20,6 +20,6 @@ public class DecimalFormatter {
     }
 
     private boolean canBeCastToLong(double calculatedResult) {
-        return calculatedResult == (long)calculatedResult;
+        return calculatedResult == (long) calculatedResult;
     }
 }

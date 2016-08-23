@@ -9,7 +9,7 @@ public class Flow {
     private List<FlowComponent> components = new ArrayList<>();
 
     public synchronized String run(String payload) {
-        if(payload == null)
+        if (payload == null)
             payload = "";
 
         for (FlowComponent component : components) {

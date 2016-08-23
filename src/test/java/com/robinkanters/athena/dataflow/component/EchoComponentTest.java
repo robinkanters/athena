@@ -20,7 +20,7 @@ public class EchoComponentTest {
     public void runReturnsInputAsOutput() throws Exception {
         assertEquals("Foo", flowComponent.run("Foo"));
     }
-    
+
     @Test
     public void runPrintsPayloadToOutput() throws Exception {
         flowComponent.run("Foo");

@@ -24,7 +24,7 @@ public class FlowTest {
     public void passingEmptyStringIntoEmptyFlow_ReturnsEmptyString() throws Exception {
         assertEquals("", flow.run(""));
     }
-    
+
     @Test
     public void passingNonEmptyStringIntoEmptyFlow_ReturnsThatStringUnmodified() throws Exception {
         assertEquals("Foo", flow.run("Foo"));

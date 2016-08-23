@@ -3,7 +3,7 @@ package com.robinkanters.athena.format;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DecimalFormatterTest {
     private DecimalFormatter formatter;
@@ -35,7 +35,7 @@ public class DecimalFormatterTest {
         assertFormatsAs(1.12345678, "1.12345678");
         //@formatter:on
     }
-    
+
     @Test
     public void formatDoubleWithMoreThanEightDecimalsIsRoundedCorrectly() throws Exception {
         String roundedDown = "1.12345678";
