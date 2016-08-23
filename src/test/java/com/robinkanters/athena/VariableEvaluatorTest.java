@@ -10,6 +10,10 @@ public class VariableEvaluatorTest {
     private VariableEvaluator variableEvaluator;
     private Variables variables;
 
+    private void assertEvaluatesAs(String input, String expected) {
+        assertEquals(expected, variableEvaluator.evaluate(input));
+    }
+
     @Before
     public void setUp() throws Exception {
         variables = new Variables();
@@ -18,25 +22,25 @@ public class VariableEvaluatorTest {
 
     @Test
     public void nullReturnsEmptyString() throws Exception {
-        assertEquals("", variableEvaluator.evaluate(null));
+        assertEvaluatesAs(null, "");
     }
-    
+
     @Test
     public void emptyStringReturnsEmptyString() throws Exception {
-        assertEquals("", variableEvaluator.evaluate(""));
+        assertEvaluatesAs("", "");
     }
 
     @Test
     public void stringWithoutVariablesIsReturnedTheSame() throws Exception {
-        assertEquals("foo", variableEvaluator.evaluate("foo"));
+        assertEvaluatesAs("foo", "foo");
     }
 
     @Test
     public void variableWithinCurlyBracesReturnsValueOfThatVariable() throws Exception {
         variables.put("variable", "bar");
 
-        assertEquals("bar", variableEvaluator.evaluate("{variable}"));
-        assertEquals("barbar", variableEvaluator.evaluate("{variable}{variable}"));
+        assertEvaluatesAs("{variable}", "bar");
+        assertEvaluatesAs("{variable}{variable}", "barbar");
     }
 
     @Test(expected = VariableEvaluator.VariableNotDefinedException.class)
