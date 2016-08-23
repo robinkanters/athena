@@ -1,5 +1,7 @@
 package com.robinkanters.athena.dataflow;
 
+import com.robinkanters.athena.dataflow.component.EchoComponent;
+import com.robinkanters.athena.util.spy.PrintStreamSpy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,22 +17,27 @@ public class FlowTest {
 
     @Test
     public void passingNullIntoEmptyFlow_ReturnsEmptyString() throws Exception {
-        flow.setPayload(null);
-        flow.run();
-        assertEquals("", flow.getPayload());
+        assertEquals("", flow.run(null));
     }
 
     @Test
     public void passingEmptyStringIntoEmptyFlow_ReturnsEmptyString() throws Exception {
-        flow.setPayload("");
-        flow.run();
-        assertEquals("", flow.getPayload());
+        assertEquals("", flow.run(""));
     }
     
     @Test
     public void passingNonEmptyStringIntoEmptyFlow_ReturnsThatStringUnmodified() throws Exception {
-        flow.setPayload("Foo");
-        flow.run();
-        assertEquals("Foo", flow.getPayload());
+        assertEquals("Foo", flow.run("Foo"));
+    }
+
+    @Test
+    public void flowWithEchoComponentReturnsStringEqualToInput() throws Exception {
+        PrintStreamSpy spy = new PrintStreamSpy();
+
+        flow.addComponent(new EchoComponent(spy));
+        String output = flow.run("Foo");
+
+        assertEquals("Foo", output);
+        assertEquals("Foo\n", spy.getPrint());
     }
 }

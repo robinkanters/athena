@@ -1,54 +1,31 @@
 package com.robinkanters.athena.dataflow.component;
 
+import com.robinkanters.athena.util.spy.PrintStreamSpy;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 
 public class EchoComponentTest {
-    private EchoComponent echoComponent;
-    private OutputSpy spy;
+    private FlowComponent flowComponent;
+    private PrintStreamSpy spy;
 
     @Before
     public void setUp() throws Exception {
-        spy = new OutputSpy();
-        echoComponent = new EchoComponent(spy);
+        spy = new PrintStreamSpy();
+        flowComponent = new EchoComponent(spy);
     }
 
     @Test
     public void runReturnsInputAsOutput() throws Exception {
-        assertEquals("Foo", echoComponent.run("Foo"));
+        assertEquals("Foo", flowComponent.run("Foo"));
     }
     
     @Test
     public void runPrintsPayloadToOutput() throws Exception {
-        echoComponent.run("Foo");
+        flowComponent.run("Foo");
 
         assertEquals("Foo\n", spy.getPrint());
     }
 
-    private class OutputSpy extends PrintStream {
-        private String print = "";
-
-        OutputSpy() {
-            super(new DummyOutputStream());
-        }
-
-        public void println(String x) {
-            print += x;
-            print += "\n";
-        }
-
-        public String getPrint() {
-            return print;
-        }
-    }
-
-    private class DummyOutputStream extends OutputStream{
-        public void write(int b) throws IOException {}
-    }
 }

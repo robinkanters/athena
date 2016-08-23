@@ -1,19 +1,25 @@
 package com.robinkanters.athena.dataflow;
 
-public class Flow {
-    private String payload;
+import com.robinkanters.athena.dataflow.component.FlowComponent;
 
-    public void setPayload(String payload) {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Flow {
+    private List<FlowComponent> components = new ArrayList<FlowComponent>();
+
+    public synchronized String run(String payload) {
         if(payload == null)
             payload = "";
-        this.payload = payload;
-    }
 
-    public void run() {
+        for (FlowComponent component : components) {
+            payload = component.run(payload);
+        }
 
-    }
-
-    public String getPayload() {
         return payload;
+    }
+
+    public void addComponent(FlowComponent flowComponent) {
+        components.add(flowComponent);
     }
 }
