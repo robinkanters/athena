@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Flow {
-    private List<FlowComponent> components = new ArrayList<FlowComponent>();
+    private List<FlowComponent> components = new ArrayList<>();
 
     public synchronized String run(String payload) {
         if(payload == null)
