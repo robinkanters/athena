@@ -2,7 +2,7 @@ package com.robinkanters.athena.dataflow.component;
 
 import java.io.PrintStream;
 
-public class EchoComponent {
+public class EchoComponent implements FlowComponent {
     private final PrintStream outputStream;
 
     public EchoComponent() {
