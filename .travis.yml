@@ -1,24 +1,10 @@
 
 language: java
 
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode8
-    - os: linux
-      jdk: openjdk7
-      before_install:
-        - jdk_switcher use openjdk7
-    - os: linux
-      jdk: oraclejdk7
-      before_install:
-        - jdk_switcher use oraclejdk7
-    - os: linux
-      jdk: oraclejdk8
-      before_install:
-        - jdk_switcher use oraclejdk8
-
-install: true
+jdk:
+  - openjdk7
+  - oraclejdk7
+  - oraclejdk8
 
 notifications:
   email: false
