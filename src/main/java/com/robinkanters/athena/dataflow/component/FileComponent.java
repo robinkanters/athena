@@ -14,7 +14,6 @@ public class FileComponent implements FlowComponent {
         return fileReader.read(fileName);
     }
 
-    @Override
     public String run(String payload) {
         return read(payload);
     }
