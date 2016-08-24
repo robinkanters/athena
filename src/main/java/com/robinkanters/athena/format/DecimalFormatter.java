@@ -10,8 +10,8 @@ public class DecimalFormatter {
         return formatDouble(input);
     }
 
-    public String format(long calculatedResult) {
-        return formatDouble(calculatedResult);
+    public String format(long input) {
+        return formatDouble(input);
     }
 
     private String formatDouble(double input) {
