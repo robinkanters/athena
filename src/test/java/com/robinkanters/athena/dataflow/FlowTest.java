@@ -1,6 +1,7 @@
 package com.robinkanters.athena.dataflow;
 
 import com.robinkanters.athena.dataflow.component.EchoComponent;
+import com.robinkanters.athena.dataflow.component.FlowComponent;
 import com.robinkanters.athena.util.spy.PrintStreamSpy;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,5 +40,38 @@ public class FlowTest {
 
         assertEquals("Foo", output);
         assertEquals("Foo\n", spy.getPrint());
+    }
+
+
+    @Test
+    public void canHaveSubFlows() {
+        Flow subflow = new Flow();
+        SpyComponent spyExpectsFoo = new SpyComponent();
+        SpyComponent spyExpectsBar = new SpyComponent();
+
+        flow.addComponent(subflow);
+        subflow.addComponent(spyExpectsFoo);
+        flow.addComponent(spyExpectsBar);
+
+        String flowOutput = flow.run("foo");
+
+        assertEquals("foo\n", spyExpectsFoo.getTrace());
+        assertEquals("bar\n", spyExpectsBar.getTrace());
+        assertEquals("bar", flowOutput);
+    }
+
+    private class SpyComponent implements FlowComponent {
+        private String trace = "";
+
+        public String run(String payload) {
+            trace += payload;
+            trace += "\n";
+
+            return "bar";
+        }
+
+        String getTrace() {
+            return trace;
+        }
     }
 }

@@ -5,7 +5,7 @@ import com.robinkanters.athena.dataflow.component.FlowComponent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flow {
+public class Flow implements FlowComponent {
     private List<FlowComponent> components = new ArrayList<>();
 
     public synchronized String run(String payload) {
