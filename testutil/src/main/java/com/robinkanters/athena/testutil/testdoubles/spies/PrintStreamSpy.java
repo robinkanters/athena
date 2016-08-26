@@ -1,6 +1,6 @@
-package com.robinkanters.athena.util.spy;
+package com.robinkanters.athena.testutil.testdoubles.spies;
 
-import com.robinkanters.athena.util.dummy.DummyOutputStream;
+import com.robinkanters.athena.testutil.testdoubles.dummies.DummyOutputStream;
 
 import java.io.PrintStream;
 

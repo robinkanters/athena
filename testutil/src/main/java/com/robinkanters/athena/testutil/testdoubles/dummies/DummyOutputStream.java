@@ -1,4 +1,4 @@
-package com.robinkanters.athena.util.dummy;
+package com.robinkanters.athena.testutil.testdoubles.dummies;
 
 import java.io.IOException;
 import java.io.OutputStream;
