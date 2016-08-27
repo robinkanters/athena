@@ -7,7 +7,9 @@ import java.util.HashMap;
 public class Variables extends HashMap<String, String> implements KeyValueStore {
     private DecimalFormatter formatter = new DecimalFormatter();
 
-    public Variables() {}
+    public Variables() {
+    }
+
     public Variables(DecimalFormatter formatter) {
         this.formatter = formatter;
     }

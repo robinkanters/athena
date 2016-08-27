@@ -1,11 +1,10 @@
 package com.robinkanters.athena.datamapping;
 
 import com.robinkanters.athena.format.DecimalFormatter;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class VariablesTest {
     private Variables variables;
