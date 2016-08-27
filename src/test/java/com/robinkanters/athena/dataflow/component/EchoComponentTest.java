@@ -1,6 +1,6 @@
 package com.robinkanters.athena.dataflow.component;
 
-import com.robinkanters.athena.testutil.testdoubles.spies.PrintStreamSpy;
+import com.robinkanters.athena.util.spy.PrintStreamSpy;
 import org.junit.Before;
 import org.junit.Test;
 

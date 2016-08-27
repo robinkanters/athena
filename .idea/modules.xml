@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/athena.iml" filepath="$PROJECT_DIR$/athena.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dataflow/dataflow.iml" filepath="$PROJECT_DIR$/dataflow/dataflow.iml" />
-      <module fileurl="file://$PROJECT_DIR$/testutil/testutil.iml" filepath="$PROJECT_DIR$/testutil/testutil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/athena.iml" filepath="$PROJECT_DIR$/.idea/modules/athena.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/athena_main.iml" filepath="$PROJECT_DIR$/.idea/modules/athena_main.iml" group="athena" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/athena_test.iml" filepath="$PROJECT_DIR$/.idea/modules/athena_test.iml" group="athena" />
     </modules>
   </component>
 </project>
