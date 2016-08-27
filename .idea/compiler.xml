@@ -26,6 +26,10 @@
         <module name="testutil" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.7" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="athena" target="1.7" />
+      <module name="dataflow" target="1.7" />
+      <module name="testutil" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

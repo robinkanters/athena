@@ -3,7 +3,6 @@ package com.robinkanters.athena.dataflow;
 import com.robinkanters.athena.dataflow.component.EchoComponent;
 import com.robinkanters.athena.dataflow.component.FlowComponent;
 import com.robinkanters.athena.testutil.testdoubles.spies.PrintStreamSpy;
-import com.robinkanters.athena.util.spy.PrintStreamSpy;
 import org.junit.Before;
 import org.junit.Test;
 
