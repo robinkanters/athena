@@ -1,10 +1,11 @@
 package com.robinkanters.athena.util.spy;
 
 import com.robinkanters.athena.util.dummy.DummyOutputStream;
+import com.robinkanters.athena.util.dummy.DummyPrintStream;
 
 import java.io.PrintStream;
 
-public class PrintStreamSpy extends PrintStream {
+public class PrintStreamSpy extends DummyPrintStream {
     private String print = "";
 
     public PrintStreamSpy() {
