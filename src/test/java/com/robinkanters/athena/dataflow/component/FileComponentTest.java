@@ -1,12 +1,9 @@
 package com.robinkanters.athena.dataflow.component;
 
 import com.robinkanters.athena.dataflow.Flow;
-import com.robinkanters.athena.dataflow.component.file.FileReader;
+import com.robinkanters.athena.util.mock.MockFileReader;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -43,23 +40,5 @@ public class FileComponentTest {
 
         assertEquals(fileContents, actualPayload);
         mockFileReader.assertReadCalled(1);
-    }
-
-    private class MockFileReader implements FileReader {
-        Map<String, String> files = new HashMap<>();
-        int readCalled = 0;
-
-        public String read(String filename) {
-            readCalled++;
-            return files.get(filename);
-        }
-
-        void add(String filename, String contents) {
-            files.put(filename, contents);
-        }
-
-        void assertReadCalled(int amount) {
-            assertEquals(amount, readCalled);
-        }
     }
 }
