@@ -15,7 +15,7 @@ public class FileReaderImpl implements FileReader {
         }
     }
 
-    private String tryRead(String filename) throws IOException {
+    protected String tryRead(String filename) throws IOException {
         File f = getFileForFilename(filename);
         return readFile(f);
     }
