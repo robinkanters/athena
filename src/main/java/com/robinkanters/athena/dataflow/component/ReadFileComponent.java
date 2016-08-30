@@ -3,10 +3,10 @@ package com.robinkanters.athena.dataflow.component;
 import com.robinkanters.athena.dataflow.component.file.FileReader;
 
 @SuppressWarnings("WeakerAccess")
-public class FileComponent implements FlowComponent {
+public class ReadFileComponent implements FlowComponent {
     private final FileReader fileReader;
 
-    public FileComponent(FileReader fileReader) {
+    public ReadFileComponent(FileReader fileReader) {
         this.fileReader = fileReader;
     }
 

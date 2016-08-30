@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class FileComponentTest {
-    private FileComponent fileComponent;
+public class ReadFileComponentTest {
+    private ReadFileComponent readFileComponent;
     private MockFileReader mockFileReader;
     private String fileContents;
     private String fileName;
@@ -16,7 +16,7 @@ public class FileComponentTest {
     @Before
     public void setUp() throws Exception {
         mockFileReader = new MockFileReader();
-        fileComponent = new FileComponent(mockFileReader);
+        readFileComponent = new ReadFileComponent(mockFileReader);
 
         fileContents = "Foobar";
         fileName = "/tmp/test.txt";
@@ -25,7 +25,7 @@ public class FileComponentTest {
 
     @Test
     public void canReadFile() throws Exception {
-        String output = fileComponent.read(fileName);
+        String output = readFileComponent.read(fileName);
 
         assertEquals(fileContents, output);
         mockFileReader.assertReadCalled(1);
@@ -34,7 +34,7 @@ public class FileComponentTest {
     @Test
     public void ifPayloadIsFileName_AfterComponentInvocation_PayloadIsFileContents() throws Exception {
         Flow flow = new Flow();
-        flow.addComponent(fileComponent);
+        flow.addComponent(readFileComponent);
 
         String actualPayload = flow.run(fileName);
 
