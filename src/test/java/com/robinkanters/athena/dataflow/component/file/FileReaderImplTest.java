@@ -21,7 +21,7 @@ public class FileReaderImplTest {
         assertEquals(fileContents, fileReader.read("some file"));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FileReaderImpl.FileReaderException.class)
     public void read_WhenThrowsIOException_IsConvertedIntoRuntimeException() throws Exception {
         FileReader fileReader = new FileReaderImpl() {
             protected String readFile(File f) throws IOException {

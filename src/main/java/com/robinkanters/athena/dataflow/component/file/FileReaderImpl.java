@@ -11,7 +11,7 @@ public class FileReaderImpl implements FileReader {
         try {
             return tryRead(filename);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileReaderException(e);
         }
     }
 
@@ -26,5 +26,11 @@ public class FileReaderImpl implements FileReader {
 
     protected String readFile(File f) throws IOException {
         return FileUtils.readFileToString(f, Charset.defaultCharset());
+    }
+
+    public class FileReaderException extends RuntimeException {
+        public FileReaderException(Throwable cause) {
+            super(cause);
+        }
     }
 }
