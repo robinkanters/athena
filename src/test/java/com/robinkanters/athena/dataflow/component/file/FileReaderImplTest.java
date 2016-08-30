@@ -1,6 +1,5 @@
 package com.robinkanters.athena.dataflow.component.file;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -9,21 +8,27 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 public class FileReaderImplTest {
-
-    private FileReaderImpl fileReader;
     private String fileContents = "Foo";
 
-    @Before
-    public void setUp() throws Exception {
-        fileReader = new FileReaderImpl() {
+    @Test
+    public void read() throws Exception {
+        FileReader fileReader = new FileReaderImpl() {
             protected String readFile(File f) throws IOException {
                 return fileContents;
             }
         };
+
+        assertEquals(fileContents, fileReader.read("some file"));
     }
 
-    @Test
-    public void read() throws Exception {
+    @Test(expected = RuntimeException.class)
+    public void read_WhenThrowsIOException_IsConvertedIntoRuntimeException() throws Exception {
+        FileReader fileReader = new FileReaderImpl() {
+            protected String readFile(File f) throws IOException {
+                throw new IOException("test");
+            }
+        };
+
         assertEquals(fileContents, fileReader.read("some file"));
     }
 }
