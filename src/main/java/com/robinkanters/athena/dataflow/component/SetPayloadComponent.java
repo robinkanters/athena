@@ -1,5 +1,6 @@
 package com.robinkanters.athena.dataflow.component;
 
+@FlowComponent.DisplayName("Set payload")
 public class SetPayloadComponent implements FlowComponent {
     private final String payload;
 

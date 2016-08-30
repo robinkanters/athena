@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class EchoComponentTest {
-    private FlowComponent flowComponent;
+    private EchoComponent flowComponent;
     private PrintStreamSpy spy;
 
     @Before
@@ -28,4 +28,9 @@ public class EchoComponentTest {
         assertEquals("Foo\n", spy.getPrint());
     }
 
+    @Test
+    public void canGetDisplayName() throws Exception {
+        String displayName = flowComponent.getClass().getAnnotation(FlowComponent.DisplayName.class).value();
+        assertEquals(displayName, flowComponent.getDisplayName());
+    }
 }
