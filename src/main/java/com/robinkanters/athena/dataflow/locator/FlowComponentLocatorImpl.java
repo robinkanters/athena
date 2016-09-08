@@ -3,8 +3,11 @@ package com.robinkanters.athena.dataflow.locator;
 import com.robinkanters.athena.dataflow.component.FlowComponent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
 
 public class FlowComponentLocatorImpl implements ComponentLocator {
     private List<FlowComponent> components = new ArrayList<>();
@@ -21,10 +24,7 @@ public class FlowComponentLocatorImpl implements ComponentLocator {
     }
 
     private boolean componentCompliesToAllFilters(FlowComponent c, ComponentFilter[] filters) {
-        for (ComponentFilter filter : filters)
-            if (!filter.test(c))
-                return false;
-        return true;
+        return stream(filters).allMatch(f -> f.test(c));
     }
 
     public void add(FlowComponent component) {
