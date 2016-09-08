@@ -23,12 +23,12 @@ public class FlowComponentLocatorImplTest {
             assertEquals(components[i], all.get(i));
     }
 
-    private FlowComponent[] registerNComponents(int amount) {
+    private FlowComponent[] addNComponents(int amount) {
         FlowComponent[] components = new FlowComponent[amount];
         for(int i=0; i<amount; i++) {
             FlowComponent component = new DummyFlowComponent();
             components[i] = component;
-            componentLocator.register(component);
+            componentLocator.add(component);
         }
 
         return components;
@@ -40,18 +40,18 @@ public class FlowComponentLocatorImplTest {
     }
 
     @Test
-    public void beforeRegister_AllReturnsEmptyList() throws Exception {
+    public void beforeadd_AllReturnsEmptyList() throws Exception {
         assertEmpty(componentLocator.all());
     }
 
     @Test
-    public void canRegisterComponent() throws Exception {
-        componentLocator.register(new DummyFlowComponent());
+    public void canaddComponent() throws Exception {
+        componentLocator.add(new DummyFlowComponent());
     }
 
     @Test
-    public void afterRegisterThreeComponents_AllReturnsAllThree() throws Exception {
-        FlowComponent[] components = registerNComponents(3);
+    public void afteraddThreeComponents_AllReturnsAllThree() throws Exception {
+        FlowComponent[] components = addNComponents(3);
 
         assertListEquals(componentLocator.all(), components);
     }
@@ -60,16 +60,16 @@ public class FlowComponentLocatorImplTest {
     public void afterAddingTheSameComponentTwice_OnlyContainsOneInstance() throws Exception {
         FlowComponent component = new DummyFlowComponent();
 
-        componentLocator.register(component);
-        componentLocator.register(component);
+        componentLocator.add(component);
+        componentLocator.add(component);
 
         assertListEquals(componentLocator.all(), component);
     }
 
     @Test
-    public void afterRegisterComponent_AllReturnsOnlyThatComponent() throws Exception {
+    public void afteraddComponent_AllReturnsOnlyThatComponent() throws Exception {
         DummyFlowComponent component = new DummyFlowComponent();
-        componentLocator.register(component);
+        componentLocator.add(component);
 
         List<FlowComponent> all = componentLocator.all();
 
@@ -78,7 +78,7 @@ public class FlowComponentLocatorImplTest {
 
     @Test
     public void filterWithoutSpecifyingFilters_ReturnsAll() throws Exception {
-        FlowComponent[] components = registerNComponents(3);
+        FlowComponent[] components = addNComponents(3);
 
         List<FlowComponent> filteredComponents = componentLocator.filter();
 
@@ -87,13 +87,13 @@ public class FlowComponentLocatorImplTest {
 
     @Test
     public void canFilter() throws Exception {
-        FlowComponent[] components = registerNComponents(3);
+        FlowComponent[] components = addNComponents(3);
 
         FlowComponent[] expectedComponents = new FlowComponent[] {components[0], components[2]};
         final FlowComponent filteredComponent = components[1];
 
         List<FlowComponent> filteredComponents = componentLocator.filter(new ComponentFilter() {
-            public boolean isCompliant(FlowComponent c) {
+            public boolean test(FlowComponent c) {
                 return c != filteredComponent;
             }
         });

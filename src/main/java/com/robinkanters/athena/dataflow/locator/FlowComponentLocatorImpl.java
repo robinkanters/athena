@@ -4,6 +4,7 @@ import com.robinkanters.athena.dataflow.component.FlowComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlowComponentLocatorImpl implements ComponentLocator {
     private List<FlowComponent> components = new ArrayList<>();
@@ -13,24 +14,23 @@ public class FlowComponentLocatorImpl implements ComponentLocator {
     }
 
     public List<FlowComponent> filter(ComponentFilter... filters) {
-        return filterComponents(all(), filters);
+        return all()
+                .stream()
+                .filter(c -> componentCompliesToAllFilters(c, filters))
+                .collect(Collectors.toList());
     }
 
-    public void register(FlowComponent component) {
-        if(components.contains(component))
+    private boolean componentCompliesToAllFilters(FlowComponent c, ComponentFilter[] filters) {
+        for (ComponentFilter filter : filters)
+            if (!filter.test(c))
+                return false;
+        return true;
+    }
+
+    public void add(FlowComponent component) {
+        if (components.contains(component))
             return;
 
         components.add(component);
-    }
-
-    private List<FlowComponent> filterComponents(List<FlowComponent> components, ComponentFilter... filters) {
-        components = new ArrayList<>(components);
-
-        for(ComponentFilter filter : filters)
-            for(FlowComponent c : components)
-                if(!filter.isCompliant(c))
-                    components.remove(c);
-
-        return components;
     }
 }
