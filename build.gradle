@@ -2,6 +2,7 @@
 plugins {
     id 'java'
     id "info.solidsoft.pitest" version "1.1.4"
+    id 'jacoco'
 }
 
 group 'com.robinkanters'
@@ -12,6 +13,12 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
 }
 
 dependencies {
