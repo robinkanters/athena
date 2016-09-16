@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ReadFileComponentTest {
+public class FileReadComponentTest {
     private ReadFileComponent readFileComponent;
     private MockFileReader mockFileReader;
     private String fileContents;
