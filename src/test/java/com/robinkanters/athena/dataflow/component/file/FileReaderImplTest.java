@@ -1,5 +1,6 @@
 package com.robinkanters.athena.dataflow.component.file;
 
+import com.robinkanters.athena.dataflow.component.file.exception.FileReaderException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class FileReaderImplTest {
         assertEquals(fileContents, fileReader.read("some file"));
     }
 
-    @Test(expected = FileReaderImpl.FileReaderException.class)
+    @Test(expected = FileReaderException.class)
     public void read_WhenThrowsIOException_IsConvertedIntoRuntimeException() throws Exception {
         assertEquals(fileContents, fileReader.read("throw exception"));
     }
