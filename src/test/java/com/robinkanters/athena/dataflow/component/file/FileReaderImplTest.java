@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class FileReaderImplTest {
     private String fileContents = "Foo";
@@ -21,7 +21,7 @@ public class FileReaderImplTest {
             }
 
             public String tryRead(String filename) throws IOException {
-                if(filename.startsWith("throw"))
+                if (filename.startsWith("throw"))
                     throw new IOException("test");
                 return super.tryRead(filename);
             }

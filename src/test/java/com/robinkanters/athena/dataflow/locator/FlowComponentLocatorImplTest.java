@@ -19,13 +19,13 @@ public class FlowComponentLocatorImplTest {
 
     private void assertListEquals(List<FlowComponent> all, FlowComponent... components) {
         assertEquals(components.length, all.size());
-        for(int i=0; i<components.length; i++)
+        for (int i = 0; i < components.length; i++)
             assertEquals(components[i], all.get(i));
     }
 
     private FlowComponent[] addNComponents(int amount) {
         FlowComponent[] components = new FlowComponent[amount];
-        for(int i=0; i<amount; i++) {
+        for (int i = 0; i < amount; i++) {
             FlowComponent component = new DummyFlowComponent();
             components[i] = component;
             componentLocator.add(component);
@@ -89,7 +89,7 @@ public class FlowComponentLocatorImplTest {
     public void canFilter() throws Exception {
         FlowComponent[] components = addNComponents(3);
 
-        FlowComponent[] expectedComponents = new FlowComponent[] {components[0], components[2]};
+        FlowComponent[] expectedComponents = new FlowComponent[]{components[0], components[2]};
         final FlowComponent filteredComponent = components[1];
 
         List<FlowComponent> filteredComponents = componentLocator.filter(new ComponentFilter() {

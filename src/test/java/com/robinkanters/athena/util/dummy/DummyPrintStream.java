@@ -7,6 +7,7 @@ public class DummyPrintStream extends PrintStream {
     public DummyPrintStream() {
         super(new DummyOutputStream());
     }
+
     public DummyPrintStream(OutputStream stream) {
         super(stream);
     }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ComponentLocator {
     List<FlowComponent> all();
+
     List<FlowComponent> filter(ComponentFilter... filters);
 
     void add(FlowComponent component);
