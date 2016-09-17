@@ -2,6 +2,7 @@
   <dictionary name="robin">
     <words>
       <w>arithmetics</w>
+      <w>deserialized</w>
     </words>
   </dictionary>
 </component>
