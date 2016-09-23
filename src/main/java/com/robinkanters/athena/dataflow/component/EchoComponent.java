@@ -14,7 +14,7 @@ public class EchoComponent implements FlowComponent {
         this.outputStream = outputStream;
     }
 
-    public String run(String payload) {
+    public String run(String payload, FlowVariables flowVariables) {
         outputStream.println(payload);
         return payload;
     }

@@ -15,7 +15,7 @@ public class ReadFileComponent implements FlowComponent {
         return fileReader.read(fileName);
     }
 
-    public String run(String payload) {
+    public String run(String payload, FlowVariables flowVariables) {
         return read(payload);
     }
 }

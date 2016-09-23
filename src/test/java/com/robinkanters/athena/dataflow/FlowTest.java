@@ -2,6 +2,8 @@ package com.robinkanters.athena.dataflow;
 
 import com.robinkanters.athena.dataflow.component.EchoComponent;
 import com.robinkanters.athena.dataflow.component.FlowComponent;
+import com.robinkanters.athena.dataflow.component.FlowVariables;
+import com.robinkanters.athena.util.dummy.DummyFlowVariables;
 import com.robinkanters.athena.util.spy.PrintStreamSpy;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,25 +12,27 @@ import static org.junit.Assert.assertEquals;
 
 public class FlowTest {
     private Flow flow;
+    private FlowVariables variables;
 
     @Before
     public void setUp() throws Exception {
         flow = new Flow();
+        variables = new DummyFlowVariables();
     }
 
     @Test
     public void passingNullIntoEmptyFlow_ReturnsEmptyString() throws Exception {
-        assertEquals("", flow.run(null));
+        assertEquals("", flow.run(null, variables));
     }
 
     @Test
     public void passingEmptyStringIntoEmptyFlow_ReturnsEmptyString() throws Exception {
-        assertEquals("", flow.run(""));
+        assertEquals("", flow.run("", variables));
     }
 
     @Test
     public void passingNonEmptyStringIntoEmptyFlow_ReturnsThatStringUnmodified() throws Exception {
-        assertEquals("Foo", flow.run("Foo"));
+        assertEquals("Foo", flow.run("Foo", variables));
     }
 
     @Test
@@ -36,7 +40,7 @@ public class FlowTest {
         PrintStreamSpy spy = new PrintStreamSpy();
 
         flow.addComponent(new EchoComponent(spy));
-        String output = flow.run("Foo");
+        String output = flow.run("Foo", variables);
 
         assertEquals("Foo", output);
         assertEquals("Foo\n", spy.getPrint());
@@ -53,7 +57,7 @@ public class FlowTest {
         subflow.addComponent(spyExpectsFoo);
         flow.addComponent(spyExpectsBar);
 
-        String flowOutput = flow.run("foo");
+        String flowOutput = flow.run("foo", variables);
 
         assertEquals("foo\n", spyExpectsFoo.getTrace());
         assertEquals("bar\n", spyExpectsBar.getTrace());
@@ -63,7 +67,7 @@ public class FlowTest {
     private class SpyComponent implements FlowComponent {
         private String trace = "";
 
-        public String run(String payload) {
+        public String run(String payload, FlowVariables flowVariables) {
             trace += payload;
             trace += "\n";
 

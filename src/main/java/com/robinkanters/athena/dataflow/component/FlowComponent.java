@@ -6,7 +6,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @FlowComponent.DisplayName("")
 public interface FlowComponent {
-    String run(String payload);
+    String run(String payload, FlowVariables flowVariables);
 
     default String getDisplayName() {
         final DisplayName annotation = getClass().getAnnotation(DisplayName.class);
