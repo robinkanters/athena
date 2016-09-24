@@ -1,6 +1,7 @@
 package com.robinkanters.athena.dataflow.component;
 
 import com.robinkanters.athena.dataflow.Flow;
+import com.robinkanters.athena.util.dummy.DummyFlowVariables;
 import com.robinkanters.athena.util.spy.FlowComponentSpy;
 import com.robinkanters.athena.util.stub.StubComponent;
 import org.junit.Before;
@@ -11,15 +12,21 @@ import static org.junit.Assert.assertEquals;
 public class SetPayloadComponentTest {
     private SetPayloadComponent setPayloadComponent;
     private String constructorPayload;
+    private DummyFlowVariables variables;
 
     private void assertComponentReturns(String input, String expectedOutput) {
-        assertEquals(expectedOutput, setPayloadComponent.run(input));
+        assertComponentReturns(input, new FlowVariablesImpl(), expectedOutput);
+    }
+
+    private void assertComponentReturns(String input, FlowVariables variables, String expectedOutput) {
+        assertEquals(expectedOutput, setPayloadComponent.run(input, variables));
     }
 
     @Before
     public void setUp() throws Exception {
         constructorPayload = "payload";
         setPayloadComponent = new SetPayloadComponent(constructorPayload);
+        variables = new DummyFlowVariables();
     }
 
     @Test
@@ -38,7 +45,7 @@ public class SetPayloadComponentTest {
         FlowComponentSpy printStreamSpy = new FlowComponentSpy();
         f.addComponent(printStreamSpy);
 
-        f.run("Foo");
+        f.run("Foo", variables);
 
         assertEquals(constructorPayload, printStreamSpy.getIncomingPayload());
     }

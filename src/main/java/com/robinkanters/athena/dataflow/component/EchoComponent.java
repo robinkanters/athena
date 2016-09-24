@@ -6,15 +6,11 @@ import java.io.PrintStream;
 public class EchoComponent implements FlowComponent {
     private final PrintStream outputStream;
 
-    public EchoComponent() {
-        this.outputStream = System.out;
-    }
-
     public EchoComponent(PrintStream outputStream) {
         this.outputStream = outputStream;
     }
 
-    public String run(String payload) {
+    public String run(String payload, FlowVariables flowVariables) {
         outputStream.println(payload);
         return payload;
     }
