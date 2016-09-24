@@ -1,4 +1,4 @@
-package com.robinkanters.athena.operation;
+package com.robinkanters.athena.math;
 
 public class SubtractionOperation implements Operation {
     public char getSymbol() {

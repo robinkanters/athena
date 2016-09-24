@@ -1,25 +1,26 @@
-package com.robinkanters.athena;
+package com.robinkanters.athena.datamapping;
 
-import com.robinkanters.athena.operation.*;
+import com.robinkanters.athena.format.DecimalFormatter;
+import com.robinkanters.athena.math.*;
 
 @SuppressWarnings("WeakerAccess")
-public class ArithmeticEvaluator {
+public class ArithmeticEvaluator implements Evaluator {
     private String input;
     private Operation operation;
+    private DecimalFormatter decimalFormatter = new DecimalFormatter();
 
     @SuppressWarnings("WeakerAccess")
-    public double evaluate(String input) {
+    public String evaluate(String input) {
         this.input = input;
         if (hasAddition())
             return calculateAddition();
-        else if(hasSubtraction())
+        else if (hasSubtraction())
             return calculateSubtraction();
-        else if(hasMultiplication())
+        else if (hasMultiplication())
             return calculateMultiplication();
         else if (hasDivision())
             return calculateDivision();
-        else
-            return Integer.parseInt(input);
+        return input;
     }
 
     private boolean hasAddition() {
@@ -38,37 +39,41 @@ public class ArithmeticEvaluator {
         return input.matches(".*\\d/\\d.*");
     }
 
-    private double calculateAddition() {
-        return calculateResult(new AdditionOperation());
+    private String calculateAddition() {
+        return calculateAndFormatResult(new AdditionOperation());
     }
 
-    private double calculateSubtraction() {
-        return calculateResult(new SubtractionOperation());
+    private String calculateSubtraction() {
+        return calculateAndFormatResult(new SubtractionOperation());
     }
 
-    private double calculateMultiplication() {
-        return calculateResult(new MultiplicationOperation());
+    private String calculateMultiplication() {
+        return calculateAndFormatResult(new MultiplicationOperation());
     }
 
-    private double calculateDivision() {
-        return calculateResult(new DivisionOperation());
+    private String calculateDivision() {
+        return calculateAndFormatResult(new DivisionOperation());
+    }
+
+    private String calculateAndFormatResult(Operation operation) {
+        return decimalFormatter.format(calculateResult(operation));
     }
 
     private double calculateResult(Operation operation) {
         this.operation = operation;
-        return operation.calculate(evaluateLeft(), evaluateRight());
+        return operation.calculate(Double.parseDouble(evaluateLeft()), Double.parseDouble(evaluateRight()));
     }
 
-    private double evaluateNested(String operation) {
+    private String evaluateNested(String operation) {
         return new ArithmeticEvaluator().evaluate(operation);
     }
 
-    private double evaluateLeft() {
+    private String evaluateLeft() {
         String expression = input.substring(0, input.indexOf(getOperand()));
         return evaluateNested(expression);
     }
 
-    private double evaluateRight() {
+    private String evaluateRight() {
         String expression = input.substring(input.indexOf(getOperand()) + 1);
         return evaluateNested(expression);
     }
