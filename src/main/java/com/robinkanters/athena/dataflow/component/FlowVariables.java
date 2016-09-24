@@ -15,9 +15,5 @@ public interface FlowVariables {
         protected NoSuchVariableException(String message) {
             super(message);
         }
-
-        protected NoSuchVariableException(String message, Throwable cause) {
-            super(message, cause);
-        }
     }
 }
