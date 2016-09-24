@@ -10,11 +10,10 @@ public interface FlowComponent {
 
     default String getDisplayName() {
         final DisplayName annotation = getClass().getAnnotation(DisplayName.class);
-        String displayName = annotation != null ? annotation.value() : "";
 
-        return displayName.isEmpty()
-                ? getClass().getSimpleName()
-                : displayName;
+        return annotation != null
+                ? annotation.value()
+                : getClass().getSimpleName();
     }
 
     @Retention(RUNTIME)
