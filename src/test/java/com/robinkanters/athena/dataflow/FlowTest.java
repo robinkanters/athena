@@ -12,27 +12,25 @@ import static org.junit.Assert.assertEquals;
 
 public class FlowTest {
     private Flow flow;
-    private FlowVariables variables;
 
     @Before
     public void setUp() throws Exception {
         flow = new Flow();
-        variables = new DummyFlowVariables();
     }
 
     @Test
     public void passingNullIntoEmptyFlow_ReturnsEmptyString() throws Exception {
-        assertEquals("", flow.run(null, variables));
+        assertEquals("", flow.run(null));
     }
 
     @Test
     public void passingEmptyStringIntoEmptyFlow_ReturnsEmptyString() throws Exception {
-        assertEquals("", flow.run("", variables));
+        assertEquals("", flow.run(""));
     }
 
     @Test
     public void passingNonEmptyStringIntoEmptyFlow_ReturnsThatStringUnmodified() throws Exception {
-        assertEquals("Foo", flow.run("Foo", variables));
+        assertEquals("Foo", flow.run("Foo"));
     }
 
     @Test
@@ -40,12 +38,11 @@ public class FlowTest {
         PrintStreamSpy spy = new PrintStreamSpy();
 
         flow.addComponent(new EchoComponent(spy));
-        String output = flow.run("Foo", variables);
+        String output = flow.run("Foo");
 
         assertEquals("Foo", output);
         assertEquals("Foo\n", spy.getPrint());
     }
-
 
     @Test
     public void canHaveSubFlows() {
@@ -57,7 +54,7 @@ public class FlowTest {
         subflow.addComponent(spyExpectsFoo);
         flow.addComponent(spyExpectsBar);
 
-        String flowOutput = flow.run("foo", variables);
+        String flowOutput = flow.run("foo");
 
         assertEquals("foo\n", spyExpectsFoo.getTrace());
         assertEquals("bar\n", spyExpectsBar.getTrace());

@@ -6,8 +6,14 @@ import com.robinkanters.athena.dataflow.component.FlowVariables;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.robinkanters.athena.dataflow.component.FlowVariables.EMPTY;
+
 public class Flow implements FlowComponent {
     protected List<FlowComponent> components = new ArrayList<>();
+
+    public String run(String payload) {
+        return run(payload, EMPTY);
+    }
 
     public String run(String payload, FlowVariables variables) {
         if (payload == null)
