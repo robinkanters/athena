@@ -10,4 +10,8 @@ public class DummyFlowVariables implements FlowVariables {
     public void set(String key, String value) {
         // do nothing
     }
+
+    public boolean has(String key) {
+        return false;
+    }
 }
