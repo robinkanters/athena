@@ -8,7 +8,7 @@ public class SetPayloadComponent implements FlowComponent {
         this.payload = payload;
     }
 
-    public String run(String ignored) {
+    public String run(String ignored, FlowVariables flowVariables) {
         return this.payload;
     }
 }

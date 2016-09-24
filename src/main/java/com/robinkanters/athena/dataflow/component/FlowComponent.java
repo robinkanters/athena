@@ -1,21 +1,22 @@
 package com.robinkanters.athena.dataflow.component;
 
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @FlowComponent.DisplayName("")
 public interface FlowComponent {
-    String run(String payload);
+    String run(String payload, FlowVariables flowVariables);
 
     default String getDisplayName() {
-        String displayName = getClass().getAnnotation(DisplayName.class).value();
+        final DisplayName annotation = getClass().getAnnotation(DisplayName.class);
 
-        return displayName.equals("")
-                ? getClass().getSimpleName()
-                : displayName;
+        return annotation != null
+                ? annotation.value()
+                : getClass().getSimpleName();
     }
 
-    @Retention(RetentionPolicy.RUNTIME)
+    @Retention(RUNTIME)
     @interface DisplayName {
         String value();
     }

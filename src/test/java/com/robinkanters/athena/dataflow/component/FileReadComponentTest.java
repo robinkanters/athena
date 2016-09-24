@@ -1,6 +1,7 @@
 package com.robinkanters.athena.dataflow.component;
 
 import com.robinkanters.athena.dataflow.Flow;
+import com.robinkanters.athena.util.dummy.DummyFlowVariables;
 import com.robinkanters.athena.util.mock.MockFileReader;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ public class FileReadComponentTest {
     private MockFileReader mockFileReader;
     private String fileContents;
     private String fileName;
+    private DummyFlowVariables variables;
 
     @Before
     public void setUp() throws Exception {
@@ -20,7 +22,9 @@ public class FileReadComponentTest {
 
         fileContents = "Foobar";
         fileName = "/tmp/test.txt";
+
         mockFileReader.add(fileName, fileContents);
+        variables = new DummyFlowVariables();
     }
 
     @Test
@@ -36,7 +40,7 @@ public class FileReadComponentTest {
         Flow flow = new Flow();
         flow.addComponent(readFileComponent);
 
-        String actualPayload = flow.run(fileName);
+        String actualPayload = flow.run(fileName, variables);
 
         assertEquals(fileContents, actualPayload);
         mockFileReader.assertReadCalled(1);

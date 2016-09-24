@@ -11,7 +11,7 @@ public class WriteFileComponent implements FlowComponent {
         this.fileWriter = fileWriter;
     }
 
-    public String run(String payload) {
+    public String run(String payload, FlowVariables flowVariables) {
         fileWriter.write(fileName, payload);
         return payload;
     }
