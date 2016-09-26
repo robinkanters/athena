@@ -24,11 +24,7 @@ public class FlowComponentLocatorImpl implements ComponentLocator {
     }
 
     private boolean componentCompliesToAllFilters(Supplier<? extends FlowComponent> c, ComponentFilter[] filters) {
-        return stream(filters).allMatch(f -> test(c, f));
-    }
-
-    private boolean test(Supplier<? extends FlowComponent> componentSupplier, ComponentFilter filter) {
-        return filter.test(componentSupplier);
+        return stream(filters).allMatch(f -> f.test(c));
     }
 
     public void add(Supplier<? extends FlowComponent> component) {
