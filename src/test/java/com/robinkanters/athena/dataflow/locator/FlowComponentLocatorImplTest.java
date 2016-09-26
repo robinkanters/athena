@@ -5,8 +5,11 @@ import com.robinkanters.athena.util.dummy.DummyFlowComponent;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
+import static java.lang.Math.min;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -17,16 +20,19 @@ public class FlowComponentLocatorImplTest {
         assertTrue(all.isEmpty());
     }
 
-    private void assertListEquals(List<FlowComponent> all, FlowComponent... components) {
+    @SafeVarargs
+    private final void assertListEquals(List<Supplier<? extends FlowComponent>> all, Supplier<? extends FlowComponent>... components) {
         assertEquals(components.length, all.size());
         for (int i = 0; i < components.length; i++)
             assertEquals(components[i], all.get(i));
     }
 
-    private FlowComponent[] addNComponents(int amount) {
-        FlowComponent[] components = new FlowComponent[amount];
-        for (int i = 0; i < amount; i++) {
-            FlowComponent component = new DummyFlowComponent();
+    private Supplier<? extends FlowComponent>[] addNComponents(int amount) throws Exception {
+        @SuppressWarnings("unchecked")
+        Supplier<? extends FlowComponent>[] components = new Supplier[amount];
+
+        for (int i = 0; i < min(amount, supplierWarehouse.size()); i++) {
+            Supplier<? extends FlowComponent> component = supplierWarehouse.get(i);
             components[i] = component;
             componentLocator.add(component);
         }
@@ -40,25 +46,25 @@ public class FlowComponentLocatorImplTest {
     }
 
     @Test
-    public void beforeadd_AllReturnsEmptyList() throws Exception {
+    public void beforeAdd_AllReturnsEmptyList() throws Exception {
         assertEmpty(componentLocator.all());
     }
 
     @Test
     public void canaddComponent() throws Exception {
-        componentLocator.add(new DummyFlowComponent());
+        componentLocator.add(DummyFlowComponent::new);
     }
 
     @Test
-    public void afteraddThreeComponents_AllReturnsAllThree() throws Exception {
-        FlowComponent[] components = addNComponents(3);
+    public void afterAddThreeComponents_AllReturnsAllThree() throws Exception {
+        Supplier<? extends FlowComponent>[] components = addNComponents(3);
 
         assertListEquals(componentLocator.all(), components);
     }
 
     @Test
     public void afterAddingTheSameComponentTwice_OnlyContainsOneInstance() throws Exception {
-        FlowComponent component = new DummyFlowComponent();
+        Supplier<DummyFlowComponent> component = DummyFlowComponent::new;
 
         componentLocator.add(component);
         componentLocator.add(component);
@@ -68,36 +74,51 @@ public class FlowComponentLocatorImplTest {
 
     @Test
     public void afteraddComponent_AllReturnsOnlyThatComponent() throws Exception {
-        DummyFlowComponent component = new DummyFlowComponent();
+        Supplier<DummyFlowComponent> component = DummyFlowComponent::new;
         componentLocator.add(component);
 
-        List<FlowComponent> all = componentLocator.all();
+        List<Supplier<? extends FlowComponent>> all = componentLocator.all();
 
         assertListEquals(all, component);
     }
 
     @Test
     public void filterWithoutSpecifyingFilters_ReturnsAll() throws Exception {
-        FlowComponent[] components = addNComponents(3);
+        Supplier<? extends FlowComponent>[] components = addNComponents(3);
 
-        List<FlowComponent> filteredComponents = componentLocator.filter();
+        List<Supplier<? extends FlowComponent>> filteredComponents = componentLocator.filter();
 
         assertListEquals(filteredComponents, components);
     }
 
     @Test
     public void canFilter() throws Exception {
-        FlowComponent[] components = addNComponents(3);
+        @SuppressWarnings("unchecked")
+        Supplier<? extends FlowComponent>[] components = addNComponents(3);
 
-        FlowComponent[] expectedComponents = new FlowComponent[]{components[0], components[2]};
-        final FlowComponent filteredComponent = components[1];
+        @SuppressWarnings("unchecked")
+        Supplier<? extends FlowComponent>[] expectedComponents = new Supplier[]{components[0], components[2]};
+        FlowComponent filteredComponent = components[1].get();
 
-        List<FlowComponent> filteredComponents = componentLocator.filter(new ComponentFilter() {
-            public boolean test(FlowComponent c) {
-                return c != filteredComponent;
-            }
-        });
+        List<Supplier<? extends FlowComponent>> filteredComponents =
+                componentLocator.filter(supplier -> supplier.get().getClass() != filteredComponent.getClass());
 
         assertListEquals(filteredComponents, expectedComponents);
     }
+
+    static final List<Supplier<? extends FlowComponent>> supplierWarehouse = new ArrayList<>();
+
+    static {
+        supplierWarehouse.add(DummyFlowComponent1::new);
+        supplierWarehouse.add(DummyFlowComponent2::new);
+        supplierWarehouse.add(DummyFlowComponent3::new);
+        supplierWarehouse.add(DummyFlowComponent4::new);
+        supplierWarehouse.add(DummyFlowComponent5::new);
+    }
+
+    static class DummyFlowComponent1 extends DummyFlowComponent {}
+    static class DummyFlowComponent2 extends DummyFlowComponent {}
+    static class DummyFlowComponent3 extends DummyFlowComponent {}
+    static class DummyFlowComponent4 extends DummyFlowComponent {}
+    static class DummyFlowComponent5 extends DummyFlowComponent {}
 }
