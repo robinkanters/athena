@@ -20,6 +20,8 @@ public class ArithmeticEvaluator implements Evaluator {
             return calculateMultiplication();
         else if (hasDivision())
             return calculateDivision();
+        if (hasExponentiation())
+            return calculateExponentiation();
         return input;
     }
 
@@ -39,6 +41,10 @@ public class ArithmeticEvaluator implements Evaluator {
         return input.matches(".*\\d/\\d.*");
     }
 
+    private boolean hasExponentiation() {
+        return input.matches(".*\\d+\\^-?\\d+.*");
+    }
+
     private String calculateAddition() {
         return calculateAndFormatResult(new AdditionOperation());
     }
@@ -53,6 +59,10 @@ public class ArithmeticEvaluator implements Evaluator {
 
     private String calculateDivision() {
         return calculateAndFormatResult(new DivisionOperation());
+    }
+
+    private String calculateExponentiation() {
+        return calculateAndFormatResult(new ExponentiationOperation());
     }
 
     private String calculateAndFormatResult(Operation operation) {
