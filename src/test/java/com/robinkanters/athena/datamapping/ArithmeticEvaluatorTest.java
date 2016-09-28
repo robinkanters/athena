@@ -55,19 +55,17 @@ public class ArithmeticEvaluatorTest {
         assertEvaluates("8/2*3", "12");
     }
 
-    @Ignore
     @Test
     public void twoToPowerThreeIsEight() throws Exception {
         assertEvaluates("2^3", "8");
     }
 
-    @Ignore
     @Test
     public void sixPlusTwoToPowerTwoIsTen() throws Exception {
         assertEvaluates("6+2^2", "10");
+        assertEvaluates("2^2+6", "10");
     }
 
-    @Ignore
     @Test
     public void tenToPowerMinusTwoIsOneHundredth() throws Exception {
         assertEvaluates("10^-2", "0.01");
