@@ -15,14 +15,14 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void read() throws Exception {
+    public void write() throws Exception {
         fileWriter.write("some file", fileContents);
         fileWriter.assertWriteCalled(1);
         fileWriter.assertWriteFileCalledWith(fileContents);
     }
 
     @Test(expected = FileWriterException.class)
-    public void read_WhenThrowsIOException_IsConvertedIntoRuntimeException() throws Exception {
+    public void write_WhenThrowsIOException_IsConvertedIntoRuntimeException() throws Exception {
         fileWriter.write("throw exception", fileContents);
         fileWriter.assertWriteCalled(0);
     }
